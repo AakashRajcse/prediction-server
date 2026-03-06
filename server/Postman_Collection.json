@@ -1,0 +1,239 @@
+{
+  "info": {
+    "name": "Fake Review Detection API",
+    "description": "Complete API collection for testing Fake Review Detection System",
+    "schema": "https://schema.postman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/health",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "health"]
+        },
+        "description": "Check if API is running"
+      }
+    },
+    {
+      "name": "Prediction - Single Review",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"review\": \"This product exceeded my expectations. Excellent quality and fast shipping!\",\n  \"rating\": 5\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/predict",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "predict"]
+        },
+        "description": "Analyze a single review and get fake/genuine verdict"
+      }
+    },
+    {
+      "name": "Prediction - Batch Analysis",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reviews\": [\n    {\n      \"review\": \"Great product! Works perfectly.\",\n      \"rating\": 5\n    },\n    {\n      \"review\": \"Amazing excellent fantastic best product perfect love\",\n      \"rating\": 5\n    },\n    {\n      \"review\": \"Product works, not amazing\",\n      \"rating\": 3\n    }\n  ]\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/predict/batch",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "predict", "batch"]
+        },
+        "description": "Analyze multiple reviews at once (max 100)"
+      }
+    },
+    {
+      "name": "History - Get All Predictions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/predictions?page=1&page_size=10",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "predictions"],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "10"
+            }
+          ]
+        },
+        "description": "Get prediction history with pagination"
+      }
+    },
+    {
+      "name": "History - Filter by FAKE",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/predictions?page=1&page_size=10&verdict=FAKE",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "predictions"],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "10"
+            },
+            {
+              "key": "verdict",
+              "value": "FAKE"
+            }
+          ]
+        },
+        "description": "Get only fake reviews"
+      }
+    },
+    {
+      "name": "History - Filter by GENUINE",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/predictions?page=1&page_size=10&verdict=GENUINE",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "predictions"],
+          "query": [
+            {
+              "key": "page",
+              "value": "1"
+            },
+            {
+              "key": "page_size",
+              "value": "10"
+            },
+            {
+              "key": "verdict",
+              "value": "GENUINE"
+            }
+          ]
+        },
+        "description": "Get only genuine reviews"
+      }
+    },
+    {
+      "name": "History - Get Prediction by ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/predictions/1",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "predictions", "1"]
+        },
+        "description": "Get detailed information about a specific prediction"
+      }
+    },
+    {
+      "name": "Analytics - Dashboard Statistics",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/analytics/stats",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "analytics", "stats"]
+        },
+        "description": "Get overall statistics"
+      }
+    },
+    {
+      "name": "Model - Get Model Information",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/model/info",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "model", "info"]
+        },
+        "description": "Get model metadata"
+      }
+    },
+    {
+      "name": "Appeal - Submit Appeal for Prediction",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"reason\": \"I believe this verdict is incorrect. The review is genuine and I can confirm it's accurate.\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/v1/predictions/1/appeal",
+          "protocol": "http",
+          "host": ["127", "0", "0", "1"],
+          "port": "8000",
+          "path": ["api", "v1", "predictions", "1", "appeal"]
+        },
+        "description": "Appeal a prediction verdict"
+      }
+    }
+  ]
+}
